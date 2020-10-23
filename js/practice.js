@@ -9,7 +9,7 @@ jQuery(function($) {
     var getArticle = function(){
         var keyword = $("#keyword").val();
         // var url = `https://qiita.com/api/v2/items?query=${keyword}`
-        $.get('http://qiita.com/api/v2/items?',{ page:no, per_page:"20", query:keyword }).done(function(data) {
+        $.get('https://qiita.com/api/v2/items?',{ page:no, per_page:"20", query:keyword }).done(function(data) {
             // debugger
             $.each(data, function(i, v){
                 // aタグオブジェクトをつくってhrefにv.urlをセット
