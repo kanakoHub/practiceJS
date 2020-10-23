@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS練習</title>
-    <meta name="description" content="JS練習するためのLPです">
+    <title>Qiita Serch</title>
+    <meta name="description" content="JS練習するためQiitaAPIを使って検索する機能を作ってみる">
     <!-- jQueryのライブラリー本体を読み込む -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -14,58 +14,25 @@
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-
-    <script>
-        $(function() {
-            var no = 1
-            // キャッシュを無効にする
-            $.ajaxSetup({
-                cache: false
-            });
-            // 記事をとってきて表示
-            var getArticle = function(){
-                $.get('http://qiita.com/api/v2/items?',
-                        { page:no, per_page:"20" }
-                    ).done(function(data) {
-                        $.each(data, function(i, v){
-                            // aタグオブジェクトをつくってhrefにv.urlをセット
-                            // v.titleをテキスト形式で表示
-                            var a = $("<a>").attr("href", v.url).text(v.title);
-                            // liタグオブジェクトをつくって先程作ったaをappend
-                            // それを#js_append_areaに追加
-                            $("#js_append_area").append($("<li>").append(a));
-                        })
-                    });
-            }
-            // 最初の20件を初期表示
-            getArticle();
-            // ボタンを押すごとに次の20件を表示
-            $("#next").click(function () {
-                ++no;
-                getArticle();
-            });
-        });
-        </script>
 </head>
 
 <body>
-
     <div id="js-for-web" class = "container">
-        <h2 id="service-title">JS練習</h2>
-        <p class="lead">プログラマーになろう！</p>
-        <p class="lead">jQuery学習中</p>
-        <div class="login-area">
-            <a href="#" id="register" class="btn">ボタン</a>
+        <h2 id="service-title">Qiita Serch</h2>
+        <p class="lead">Qiitaの記事からキーワードで検索してみよう</p>
+        <div class="keyword-input-area">
+            <label for="">キーワード</label>
+            <input id="keyword" type="text" value="">
+            <button id="button" class="btn">検索</button>
         </div>
-        <input id="user-status" type="text" value="user">
-        <button id="button" class="btn">クリック</button>
+        
+        <ul id="js_append_area">
+        </ul>
+        <a id="next" href="#">次の20件を表示</a>
+        
         <img src="https://joeschmoe.io/api/v1/random" />
     </div>
-
-    <ul id="js_append_area">
-    </ul>
-    <a id="next" href="#">次の20件を表示</a>
-
+    
 </body>
 
 </html>
